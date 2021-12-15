@@ -2,6 +2,7 @@ import java.util.LinkedList;
 public class Nodo {
     
     String nombre;
+    Object estado;
     LinkedList<Nodo> vecinos = new LinkedList<Nodo>();
     
     Nodo(String data)
