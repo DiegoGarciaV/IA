@@ -23,6 +23,14 @@ public class Grafo
 
     public static void main(String[] args) {
 
+        
+        
+        
+    }
+
+
+    public static void prueba()
+    {
         Grafo g = new Grafo();
 
         g.agregaNodo("N1");
@@ -43,7 +51,6 @@ public class Grafo
         g.nodos.get(3).agregaVecino(g.nodos.get(1));
 
         g.muesraGrafo();
-        
     }
 
 }

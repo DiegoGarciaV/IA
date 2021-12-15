@@ -2,12 +2,17 @@ import java.util.LinkedList;
 public class Nodo {
     
     String nombre;
-    Object estado;
+    int estado[][] = new int[8][8];
     LinkedList<Nodo> vecinos = new LinkedList<Nodo>();
     
     Nodo(String data)
     {
         this.nombre = data;
+        estado[3][3] = -1;
+        estado[4][4] = -1;
+
+        estado[3][4] = 1;
+        estado[4][3] = 1;
     }
 
     void agregaVecino(String data)
@@ -34,6 +39,21 @@ public class Nodo {
         {
             vecinos.addFirst(new Nodo(data));
         }
+    }
+
+    String imprimeEstado()
+    {
+        String r = "";
+        int i,j;
+        for(i = 0;i < 8;i++)
+        {
+            for(j = 0; j  < 8; j++)
+            {
+                r = r + (estado[i][j] == 0 ? "-" : estado[i][j] > 0 ? "O" : "X");
+            }
+            r = r + "\n";
+        }
+        return r;
     }
 
     void muestraVecinos()
