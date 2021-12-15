@@ -21,14 +21,6 @@ public class Grafo
         }
     }
 
-    public static void main(String[] args) {
-
-        
-        
-        
-    }
-
-
     public static void prueba()
     {
         Grafo g = new Grafo();

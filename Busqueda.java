@@ -11,4 +11,14 @@ public class Busqueda {
         
     }
 
+    public static void main(String[] args) {
+        
+        Busqueda buscar = new Busqueda();
+        Grafo arb = buscar.arbol;
+
+        arb.agregaNodo("Inicial");
+        System.out.println(arb.nodos.getFirst().imprimeEstado());
+        
+    }
+
 }
