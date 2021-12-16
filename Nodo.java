@@ -3,7 +3,7 @@ public class Nodo {
     
     String nombre;
     int estado[][] = new int[8][8];
-    LinkedList<Nodo> vecinos = new LinkedList<Nodo>();
+    LinkedList<NodoPeso> vecinos = new LinkedList<NodoPeso>();
     
     Nodo(String data)
     {
@@ -19,7 +19,16 @@ public class Nodo {
     {
         if(data != null)
         {
-            vecinos.addLast(new Nodo(data));
+            vecinos.addLast(new NodoPeso(data));
+        }
+            
+    }
+
+    void agregaVecinoCoste(String data, double w)
+    {
+        if(data != null)
+        {
+            vecinos.addLast(new NodoPeso(data,w));
         }
             
     }
@@ -28,7 +37,16 @@ public class Nodo {
     {
         if(n != null)
         {
-            vecinos.addLast(n);
+            vecinos.addLast(new NodoPeso(n));
+        }
+            
+    }
+
+    void agregaVecinoCoste(Nodo n, double w)
+    {
+        if(n != null)
+        {
+            vecinos.addLast(new NodoPeso(n,w));
         }
             
     }
@@ -37,7 +55,23 @@ public class Nodo {
     {
         if(data != null)
         {
-            vecinos.addFirst(new Nodo(data));
+            vecinos.addFirst(new NodoPeso(data));
+        }
+    }
+
+    void insertaVecino(Nodo n)
+    {
+        if(n != null)
+        {
+            vecinos.addFirst(new NodoPeso(n));
+        }
+    }
+
+    void insertaVecinoPeso(Nodo n,double w)
+    {
+        if(n != null)
+        {
+            vecinos.addFirst(new NodoPeso(n,w));
         }
     }
 
@@ -60,9 +94,9 @@ public class Nodo {
     {
         int i = 0;
         System.out.print("[");
-        for(Nodo v : this.vecinos)
+        for(NodoPeso v : this.vecinos)
         {
-            System.out.print(v.nombre);
+            System.out.print("(" + v.nNodo.nombre + "," + v.peso + ")");
             if(i < this.vecinos.size()-1)
                 System.out.print(", ");
 
