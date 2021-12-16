@@ -29,6 +29,14 @@ public class Rumania {
         rum.arbol.agregaNodo("Iasi");
         rum.arbol.agregaNodo("Neamt");
 
+        rum.arbol.getNodo("Oradea").agregaVecinoCoste(rum.arbol.getNodo("Zerind"), 71);
+        rum.arbol.getNodo("Oradea").agregaVecinoCoste(rum.arbol.getNodo("Sibiu"), 151);
+
+        rum.arbol.nodos.get(1).nombre = "Zeriiind";
+
+        rum.arbol.muesraGrafo();
+
+
     }
     
 }

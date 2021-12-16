@@ -21,6 +21,37 @@ public class Grafo
         }
     }
 
+    Nodo getNodo(String data)
+    {
+        for(Nodo n : nodos)
+        {
+            if(n.nombre.equals(data))
+            {
+                return n;
+            }   
+        }
+        return null;
+    }
+
+    int getNodoIndex(String data)
+    {
+        int i = 0;
+        for(Nodo n : nodos)
+        {
+            if(n.nombre.equals(data))
+            {
+                return i;
+            }   
+            i++;
+        }
+        return -1;
+    }
+
+    /*
+    public static void main(String[] args) {
+     prueba();   
+    }*/
+
     public static void prueba()
     {
         Grafo g = new Grafo();
@@ -33,14 +64,14 @@ public class Grafo
         g.agregaNodo("N6");
         g.agregaNodo("N7");
         
-        g.nodos.get(0).agregaVecino(g.nodos.get(2));
-        g.nodos.get(0).agregaVecino(g.nodos.get(3));
+        g.nodos.get(0).agregaVecinoCoste(g.nodos.get(2),2);
+        g.nodos.get(0).agregaVecinoCoste(g.nodos.get(3),3);
 
         g.nodos.get(1).agregaVecino(g.nodos.get(4));
-        g.nodos.get(1).agregaVecino(g.nodos.get(5));
+        g.nodos.get(1).agregaVecinoCoste(g.nodos.get(5),5);
         g.nodos.get(1).agregaVecino(g.nodos.get(6));
 
-        g.nodos.get(3).agregaVecino(g.nodos.get(1));
+        g.nodos.get(3).agregaVecinoCoste(g.nodos.get(1),4);
 
         g.muesraGrafo();
     }

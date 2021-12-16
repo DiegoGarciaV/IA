@@ -67,7 +67,7 @@ public class Nodo {
         }
     }
 
-    void insertaVecinoPeso(Nodo n,double w)
+    void insertaVecinoCoste(Nodo n,double w)
     {
         if(n != null)
         {
