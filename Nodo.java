@@ -75,6 +75,21 @@ public class Nodo {
         }
     }
 
+    boolean equals(Nodo n)
+    {
+        if(this == n) 
+        {
+            return true;
+        }
+
+        if(n instanceof Nodo && n.nombre == this.nombre) 
+        {
+            return true;
+        }
+   
+        return false;
+    }
+
     String imprimeEstado()
     {
         String r = "";
