@@ -190,9 +190,6 @@ public class Rumania {
             System.out.println("");
             rum.ordenaFrontera();
         }
-
-
-
     }
     
 }
