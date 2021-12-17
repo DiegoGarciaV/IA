@@ -117,8 +117,8 @@ public class Rumania {
 
         rum.arbol.getNodo("Sibiu").agregaVecinoCoste(rum.arbol.getNodo("Oradea"), 151);
         rum.arbol.getNodo("Sibiu").agregaVecinoCoste(rum.arbol.getNodo("Arad"), 140);
-        rum.arbol.getNodo("Sibiu").agregaVecinoCoste(rum.arbol.getNodo("Rimnicu Vilcea"), 99);
-        rum.arbol.getNodo("Sibiu").agregaVecinoCoste(rum.arbol.getNodo("Fagaras"), 80);
+        rum.arbol.getNodo("Sibiu").agregaVecinoCoste(rum.arbol.getNodo("Rimnicu Vilcea"), 80);
+        rum.arbol.getNodo("Sibiu").agregaVecinoCoste(rum.arbol.getNodo("Fagaras"), 99);
 
         rum.arbol.getNodo("Rimnicu Vilcea").agregaVecinoCoste(rum.arbol.getNodo("Sibiu"), 80);
         rum.arbol.getNodo("Rimnicu Vilcea").agregaVecinoCoste(rum.arbol.getNodo("Craiova"), 146);
