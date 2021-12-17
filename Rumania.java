@@ -16,7 +16,7 @@ public class Rumania {
         int i = 0;
         for(NodoPeso n : L)
         {
-            System.out.print(n.nNodo.nombre);
+            System.out.print(n.nNodo.nombre + " " + n.peso);
             if(i++ < L.size()-1)
                 System.out.print(", ");
         }
@@ -117,8 +117,8 @@ public class Rumania {
 
         rum.arbol.getNodo("Sibiu").agregaVecinoCoste(rum.arbol.getNodo("Oradea"), 151);
         rum.arbol.getNodo("Sibiu").agregaVecinoCoste(rum.arbol.getNodo("Arad"), 140);
-        rum.arbol.getNodo("Sibiu").agregaVecinoCoste(rum.arbol.getNodo("Fagaras"), 99);
-        rum.arbol.getNodo("Sibiu").agregaVecinoCoste(rum.arbol.getNodo("Rimnicu Vilcea"), 80);
+        rum.arbol.getNodo("Sibiu").agregaVecinoCoste(rum.arbol.getNodo("Rimnicu Vilcea"), 99);
+        rum.arbol.getNodo("Sibiu").agregaVecinoCoste(rum.arbol.getNodo("Fagaras"), 80);
 
         rum.arbol.getNodo("Rimnicu Vilcea").agregaVecinoCoste(rum.arbol.getNodo("Sibiu"), 80);
         rum.arbol.getNodo("Rimnicu Vilcea").agregaVecinoCoste(rum.arbol.getNodo("Craiova"), 146);
@@ -157,29 +157,38 @@ public class Rumania {
 
         //rum.arbol.muesraGrafo();
         
-        rum.frontera.addFirst(new NodoPeso(rum.arbol.nodos.getFirst(),1));
+        rum.frontera.addFirst(new NodoPeso(rum.arbol.nodos.getFirst(),0));
         while(rum.frontera.size()>0)
         {
             System.out.print("Frontera: ");
             rum.imprimeFrontera(rum.frontera);
             System.out.println("");
+            NodoPeso explorando = rum.frontera.pop();
+            double w = explorando.peso;
+            
+            if(rum.exito(explorando.nNodo))
+            {   
+                System.out.println("Estado objetivo alcanzado, costo: " + w);
+                break;
+            }
+            
 
-            Nodo explorando = rum.frontera.pop().nNodo;
-            rum.visitados.addLast(explorando);
-            System.out.println(explorando.nombre);
-            for(NodoPeso h : explorando.vecinos)
+            rum.visitados.addLast(explorando.nNodo);
+            System.out.println(explorando.nNodo.nombre);
+            for(NodoPeso h : explorando.nNodo.vecinos)
             {
                 if(!rum.visitados.contains(h.nNodo))
                 {
                     int indice = rum.nodoEnFrontera(h.nNodo);
                     if(indice == -1)
-                        rum.frontera.push(h);
-                    else
-                        rum.frontera.get(indice).peso = h.peso;
+                        rum.frontera.push(new NodoPeso(h.nNodo, h.peso + w));
+                    else if(h.peso + w < rum.frontera.get(indice).peso)
+                        rum.frontera.get(indice).peso = h.peso + w;
 
                 }
             }
             System.out.println("");
+            rum.ordenaFrontera();
         }
 
 
