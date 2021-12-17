@@ -7,7 +7,7 @@ public class Rumania {
 
     boolean exito(Nodo n)
     {
-        return n.nombre.equals("Neamt");
+        return n.nombre.equals("Drobeta");
 
     }
 
