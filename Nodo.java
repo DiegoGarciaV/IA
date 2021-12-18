@@ -2,19 +2,25 @@ import java.util.LinkedList;
 public class Nodo {
     
     String nombre;
-    int estado[][] = new int[8][8];
+    int estado[][];
     LinkedList<NodoPeso> vecinos = new LinkedList<NodoPeso>();
     
     Nodo(String data)
     {
         this.nombre = data;
+        
+    }
+
+    Nodo(String data,int[][] m)
+    {
+        this.nombre = data;
+        estado  = new int[8][8];
         estado[3][3] = -1;
         estado[4][4] = -1;
 
         estado[3][4] = 1;
         estado[4][3] = 1;
     }
-
     void agregaVecino(String data)
     {
         if(data != null)
