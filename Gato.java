@@ -178,6 +178,8 @@ public class Gato {
             System.out.println("\n");
 
         }
+        if(res == 0)
+            System.out.println("Fin de la partida, nadie gana");
     }
     
 }
