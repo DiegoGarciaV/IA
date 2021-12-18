@@ -135,6 +135,11 @@ public class Gato {
                 y = 3;
 
             int k = (y-1)*3 + (x-1);
+            if(n.nombre.toCharArray()[k] != '-')
+            {
+                System.out.println("Casilla ocupada\n");
+                continue;
+            }
             n.nombre = n.nombre.substring(0,k) + gto.jugador + n.nombre.substring(k+1);
             gto.imprimeEstado(n.nombre);
             System.out.println("");
