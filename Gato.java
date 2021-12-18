@@ -138,10 +138,15 @@ public class Gato {
             n.nombre = n.nombre.substring(0,k) + gto.jugador + n.nombre.substring(k+1);
             gto.imprimeEstado(n.nombre);
             System.out.println("");
-            if(gto.nodoTerminal(n) && gto.ganaTurno(n, gto.jugador))
+            if(gto.nodoTerminal(n))
             {
-                System.out.println("Fin de la partida, Ganan " + gto.jugador);
-                res = -1;
+                if(gto.ganaTurno(n, gto.jugador))
+                {
+                    System.out.println("Fin de la partida, Ganan " + gto.jugador);
+                    res = -1;
+                }
+                break;
+                
             }
                 
             k = 0;
