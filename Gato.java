@@ -138,7 +138,7 @@ public class Gato {
             n.nombre = n.nombre.substring(0,k) + gto.jugador + n.nombre.substring(k+1);
             gto.imprimeEstado(n.nombre);
             System.out.println("");
-            if(gto.nodoTerminal(n))
+            if(gto.nodoTerminal(n) && gto.ganaTurno(n, gto.jugador))
             {
                 System.out.println("Fin de la partida, Ganan " + gto.jugador);
                 res = -1;
@@ -170,7 +170,7 @@ public class Gato {
 
             n = new Nodo(maxNodo.nombre);
             gto.imprimeEstado(n.nombre);
-            if(gto.nodoTerminal(n) && res == 0)
+            if(gto.nodoTerminal(n) && gto.ganaTurno(n, gto.agente))
             {
                 System.out.println("Fin de la partida, Ganan " + gto.agente);
                 res = 1;
@@ -179,7 +179,7 @@ public class Gato {
 
         }
         if(res == 0)
-            System.out.println("Fin de la partida, nadie gana");
+            System.out.println("Fin de la partida, empate");
     }
     
 }
