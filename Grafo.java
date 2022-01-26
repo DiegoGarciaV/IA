@@ -11,6 +11,16 @@ public class Grafo
         nodos.addLast(new Nodo(data));
     }
 
+    void agregaNodo(Nodo data)
+    {
+        nodos.addLast(data);
+    }
+
+    void agregaNodo(String data, int[][] m, int c, int k)
+    {
+        nodos.addLast(new Nodo(data,m,c,k));
+    }
+
     void muesraGrafo()
     {
         for(Nodo n : this.nodos)

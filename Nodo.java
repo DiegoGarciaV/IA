@@ -11,16 +11,19 @@ public class Nodo {
         
     }
 
-    Nodo(String data,int[][] m)
+    Nodo(String data,int[][] m, int c, int k)
     {
         this.nombre = data;
-        estado  = new int[8][8];
-        estado[3][3] = -1;
-        estado[4][4] = -1;
-
-        estado[3][4] = 1;
-        estado[4][3] = 1;
+        estado  = new int[c][k];
+        for(int i = 0; i < c; i++)
+        {
+            for(int j = 0; j < k; j++)
+            {
+                estado[i][j]  = m[i][j];
+            }
+        }
     }
+
     void agregaVecino(String data)
     {
         if(data != null)
@@ -88,7 +91,7 @@ public class Nodo {
             return true;
         }
 
-        if(n instanceof Nodo && n.nombre == this.nombre) 
+        if(n instanceof Nodo && n.nombre.equals(this.nombre))
         {
             return true;
         }
@@ -100,11 +103,13 @@ public class Nodo {
     {
         String r = "";
         int i,j;
-        for(i = 0;i < 8;i++)
+        int h = estado.length,k = 0;
+        for(i = 0;i < h;i++)
         {
-            for(j = 0; j  < 8; j++)
+            k = estado[i].length;
+            for(j = 0; j  < k; j++)
             {
-                r = r + (estado[i][j] == 0 ? " - " : estado[i][j] > 0 ? " O " : " X ");
+                r = r + estado[i][j] + " ";
             }
             r = r + "\n";
         }

@@ -6,6 +6,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Canivales",
+            "request": "launch",
+            "mainClass": "Canivales",
+            "projectName": "IA_ed92c761"
+        },
+        {
+            "type": "java",
+            "name": "Launch Rumania",
+            "request": "launch",
+            "mainClass": "Rumania",
+            "projectName": "IA_ed92c761"
+        },
+        {
+            "type": "java",
+            "name": "Launch Gato",
+            "request": "launch",
+            "mainClass": "Gato",
+            "projectName": "IA_ed92c761"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
