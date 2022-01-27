@@ -19,6 +19,56 @@ public class Canivales {
         }
     }
 
+    void imprimeVisitados()
+    {
+        int i = 0;
+
+        for(Nodo n : this.visitados)
+        {
+            System.out.print(n.nombre);
+            if(i++ < this.visitados.size()-1)
+                System.out.print(", ");
+        }
+    }
+
+    int nodoEnLista(Nodo n,LinkedList<Nodo> L)
+    {
+        int i= 0;
+        for(Nodo nNodo : L)
+        {
+            if(nNodo.equals(n))
+                return i;
+            else
+                i++;
+        }
+        return -1;
+    }
+    void ordenaFrontera()
+    {
+        
+        int i = 0,indice = 0,k = 0;
+        while(k < this.frontera.size())
+        {
+            indice = 0;
+            double min = 10000000.0;
+            for(i = 0;i< this.frontera.size() - k ;i++)
+            {
+                if(this.frontera.get(i).peso < min)
+                {
+                    min = this.frontera.get(i).peso;
+                    indice = i;
+                }
+            }
+            NodoPeso minNodo = this.frontera.get(indice);
+            this.frontera.addLast(minNodo);
+            this.frontera.remove(indice);
+            k++;
+
+        }
+            
+
+    }
+    
     int nodoEnFrontera(Nodo n)
     {
         int i= 0;
@@ -35,15 +85,7 @@ public class Canivales {
 
     int nodoVisitado(Nodo n)
     {
-        int i= 0;
-        for(Nodo nNodo : this.visitados)
-        {
-            if(nNodo.equals(n))
-                return i;
-            else
-                i++;
-        }
-        return -1;
+        return nodoEnLista(n,this.visitados);
     }
 
 
@@ -125,29 +167,37 @@ public class Canivales {
             System.out.print("Frontera: ");
             can.imprimeFrontera(can.frontera);
             System.out.println("");
+
+            System.out.print("Visitados: ");
+            can.imprimeVisitados();
+            System.out.println("");
+
+
             NodoPeso explorando = can.frontera.pop();
             double w = explorando.peso;
             System.out.println("Explorando: " + explorando.nNodo.nombre);
             LinkedList<Nodo> hijos = new LinkedList<Nodo>();
             hijos.clear();
 
+            
+            if(can.nodoTerminal(explorando.nNodo) > -1)
+                hijos = can.expandeHijos(explorando.nNodo);
+        
+            for(Nodo h : hijos)
+            {
+                if(can.nodoEnLista(h, can.arbol.nodos) == -1)
+                    can.arbol.agregaNodo(h);
+                can.arbol.getNodo(explorando.nNodo.nombre).agregaVecinoCoste(can.arbol.getNodo(h.nombre), w +1);
+            }
+
             if(can.nodoTerminal(explorando.nNodo) == 1)
             {   
                 System.out.println("Estado objetivo alcanzado, costo: " + w);
                 break;
             }
-            else if(can.nodoTerminal(explorando.nNodo) == 0)
-                hijos = can.expandeHijos(explorando.nNodo);
-        
-            for(Nodo h : hijos)
-            {
-                if(can.nodoVisitado(h) == -1)
-                    can.arbol.agregaNodo(h);
-                can.arbol.getNodo(explorando.nNodo.nombre).agregaVecinoCoste(can.arbol.getNodo(h.nombre), w +1);
-            }
 
             can.visitados.addLast(explorando.nNodo);
-            System.out.println(explorando.nNodo.nombre);
+
             for(NodoPeso h : explorando.nNodo.vecinos)
             {
                 if(can.nodoVisitado(h.nNodo) == -1)
@@ -160,8 +210,45 @@ public class Canivales {
             }
             System.out.println("");
         }
-
+        System.out.println("\n'Arbol: \n");
         can.arbol.muesraGrafo();
+
+
+        can.frontera.clear();
+        can.visitados.clear();
+        can.frontera.addFirst(new NodoPeso(can.arbol.nodos.getFirst(),0));
+        while(can.frontera.size()>0)
+        {
+            System.out.print("Frontera: ");
+            can.imprimeFrontera(can.frontera);
+            System.out.println("");
+            NodoPeso explorando = can.frontera.pop();
+            double w = explorando.peso;
+            
+            if(can.nodoTerminal(explorando.nNodo) == 1)
+            {   
+                System.out.println("Estado objetivo alcanzado, costo: " + w);
+                break;
+            }
+            
+
+            can.visitados.addLast(explorando.nNodo);
+            System.out.println(explorando.nNodo.nombre);
+            for(NodoPeso h : explorando.nNodo.vecinos)
+            {
+                if(!can.visitados.contains(h.nNodo))
+                {
+                    int indice = can.nodoEnFrontera(h.nNodo);
+                    if(indice == -1)
+                        can.frontera.push(new NodoPeso(h.nNodo, h.peso + h.nNodo.estado[0][0] + h.nNodo.estado[0][1]));
+                    else if(h.peso + w < can.frontera.get(indice).peso)
+                        can.frontera.get(indice).peso = h.peso + w;
+
+                }
+            }
+            System.out.println("");
+            can.ordenaFrontera();
+        }
 
     }
 
